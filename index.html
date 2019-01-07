@@ -43,12 +43,13 @@
 				const fname = $this.data( 'fname' );
 				const url   = $this.attr( 'href' );
 				if ( downloadPermissions ) {
-					if( downloadPermissions[ fname ] ) downloadFile( fname, url );
-					else return true;
+					if( downloadPermissions[ fname ] )
+						downloadFile( fname, url );
 				} else {
 					$.getJSON( 'isDownload.json', function( data ) {
 							downloadPermissions = data;
-							if( downloadPermissions[ fname ] ) downloadFile( fname, url );
+							if( downloadPermissions[ fname ] )
+								downloadFile( fname, url );
 						} )
 						.fail( function( data ) {
 							alert( "Bad JSON! Bad!" );
