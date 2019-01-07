@@ -11,6 +11,9 @@
 		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400" />
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+		<link rel="stylesheet" href="../dialog/dialog.css" />
+		<script src="../dialog/dialog.js"></script>
+
 	</head>
 
 	<body>
@@ -26,6 +29,7 @@
 		</div>
 		<script>
 
+			const dialog = new Dialog();
 			const fileList = [
 				'README.md',
 				'somescript.js',
@@ -43,13 +47,11 @@
 				const fname = $this.data( 'fname' );
 				const url   = $this.attr( 'href' );
 				if ( downloadPermissions ) {
-					if( downloadPermissions[ fname ] )
-						downloadFile( fname, url );
+					tryDownload( fname, url );
 				} else {
 					$.getJSON( 'isDownload.json', function( data ) {
 							downloadPermissions = data;
-							if( downloadPermissions[ fname ] )
-								downloadFile( fname, url );
+							tryDownload( fname, url );
 						} )
 						.fail( function( data ) {
 							alert( "Bad JSON! Bad!" );
@@ -59,8 +61,16 @@
 
 			} );
 
+			function tryDownload( filename, url ) {
+
+				if( downloadPermissions[ filename ] )
+					downloadFile( filename, url );
+				else
+					dialog.open( 'Sry dude.. dis file not for download.' );
+
+			}
 			const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) );
-			const downloadFile = downloadAttrSupported? function ( filename, url ) {
+			const downloadFile = downloadAttrSupported? function( filename, url ) {
 					const link = document.createElement( 'a' );
 					link.download = 'dl_' + filename;
 					link.href = url;
