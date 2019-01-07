@@ -4,7 +4,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>download test</title>
+		<title>download links test</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 		<link rel="stylesheet" href="css/main.css" />
@@ -20,9 +20,12 @@
 
 		<div id="wrapper">
 			<header>
-				<h1>download test</h1>
+				<h1>download links test</h1>
 			</header>
 
+			<p>
+				A test for creating client-side download links.
+			</p>
 			<div id="file-list">
 				<h2>Files</h2>
 			</div>
@@ -69,7 +72,7 @@
 					dialog.open( 'Sry dude.. dis file not for download.' );
 
 			}
-			const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) );
+			const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) ) && false;
 			const downloadFile = downloadAttrSupported? function( filename, url ) {
 					const link = document.createElement( 'a' );
 					link.download = 'dl_' + filename;
