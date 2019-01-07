@@ -79,11 +79,14 @@
 					link.href = url;
 					link.click();
 				}: function ( filename, url ) {
-					$( '<iframe style="display:none;" src="https://shoobyd.pic-time.com/-test/download?mode=lowresphoto&photoId=371046869"></iframe>' )
+					const $iframe = $( '<iframe style="display:none;" src="https://shoobyd.pic-time.com/-test/download?mode=lowresphoto&photoId=371046869"></iframe>' )
 						.on( 'load', function() {
 							alert( 'iFrame loaded!' );
 						} )
 						.appendTo( 'body' );
+					setTimeout( () => {
+						$iframe.remove();
+					}, 10*60*1000 );
 				};
 
 		</script>
