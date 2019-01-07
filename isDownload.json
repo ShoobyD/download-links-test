@@ -1,0 +1,6 @@
+{
+	"README.md"     : true,
+	"somescript.js" : false,
+	"sad_dude.jpg"  : true,
+	"bambi.jpg"     : false
+}
