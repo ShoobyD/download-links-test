@@ -1,5 +1,5 @@
-# download-links-test
-A test for creating client-side download links.
+# dynamic-download-links
+Creating client-side download links dynamically.
 
-[Demo](https://shoobyd.github.io/download-links-test/)
+[Demo](https://shoobyd.github.io/dynamic-download-links/)
 
