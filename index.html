@@ -26,6 +26,9 @@
 			<p>
 				A test for creating client-side download links.
 			</p>
+			<div>
+				<a href="files/bambi.jpg" download>download bambi.jpg</a>
+			</div>
 			<div id="file-list">
 				<h2>Files</h2>
 			</div>
@@ -72,12 +75,11 @@
 					dialog.open( 'Sry dude.. dis file not for download.' );
 
 			}
-			const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) ) && false;
+			const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) );
 			const downloadFile = downloadAttrSupported? function( filename, url ) {
-					const link = document.createElement( 'a' );
-					link.download = 'dl_' + filename;
-					link.href = url;
-					link.click();
+					const $link = $( `<a download="dl_${ filename }" href=${ url }>` ).appendTo( 'body' );
+					$link[ 0 ].click();
+					$link.remove();
 				}: function ( filename, url ) {
 					const $iframe = $( '<iframe src="https://shoobyd.pic-time.com/-test/download?mode=lowresphoto&photoId=371046869"></iframe>' )
 						.css( {
@@ -94,7 +96,7 @@
 						.appendTo( 'body' );
 					setTimeout( () => {
 						$iframe.remove();
-					}, 10*60*1000 );
+					}, 7*60*1000 );
 				};
 
 		</script>
