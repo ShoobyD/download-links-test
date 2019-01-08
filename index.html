@@ -4,7 +4,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>download links test</title>
+		<title>Dynamic Download Links</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 		<link rel="stylesheet" href="css/main.css" />
@@ -20,14 +20,14 @@
 
 		<div id="wrapper">
 			<header>
-				<h1>download links test</h1>
+				<h1>Dynamic Download Links</h1>
 			</header>
 
 			<p>
 				A test for creating client-side download links.
 			</p>
 			<div>
-				<a href="files/bambi.jpg" download>download bambi.jpg</a>
+				Static download: <a href="files/bambi.jpg" download>bambi.jpg</a>
 			</div>
 			<div id="file-list">
 				<h2>Files</h2>
@@ -75,8 +75,13 @@
 					dialog.open( 'Sry dude.. dis file not for download.' );
 
 			}
-			const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) );
-			const downloadFile = downloadAttrSupported? function( filename, url ) {
+
+			const downloadFile = ( function() {
+
+				const forceIframeDL = false;
+				const downloadAttrSupported = ( 'download' in document.createElement( 'a' ) );
+
+				return !forceIframeDL && downloadAttrSupported? function( filename, url ) {
 					const $link = $( `<a download="dl_${ filename }" href=${ url }>` ).appendTo( 'body' );
 					$link[ 0 ].click();
 					$link.remove();
@@ -98,6 +103,8 @@
 						$iframe.remove();
 					}, 7*60*1000 );
 				};
+
+			} )();
 
 		</script>
 
